@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Register - HSBC UK</title>
+    <meta name="description" content="Register for HSBC UK Online Banking">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <meta name="theme-color" content="#ffffff">
+    
+    <link rel="stylesheet" href="css/clientlib-default.min.bc3db1806f34ca832853612759e8756d.css" type="text/css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'UniversNextforHSBCW02-Rg', Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        
+        .register-header {
+            background-color: #ffffff;
+            padding: 20px 0;
+            border-bottom: 1px solid #e5e5e5;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .register-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .register-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .register-logo img {
+            height: 32px;
+            width: auto;
+        }
+        
+        .register-back-link {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+        
+        .register-back-link:hover {
+            color: #db0011;
+            text-decoration: underline;
+        }
+        
+        .register-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .register-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .register-title {
+            font-size: 32px;
+            font-weight: 300;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .register-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .form-section {
+            margin-bottom: 35px;
+        }
+        
+        .form-section-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .form-label-hint {
+            font-size: 12px;
+            color: #888;
+            font-weight: 400;
+            margin-left: 5px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #db0011;
+        }
+        
+        .form-input-small {
+            max-width: 200px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            transition: border-color 0.3s;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: #db0011;
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .form-checkbox input {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            margin-top: 2px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        .form-checkbox label {
+            font-size: 13px;
+            color: #333;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+        
+        .form-checkbox label a {
+            color: #db0011;
+            text-decoration: none;
+        }
+        
+        .form-checkbox label a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            background-color: #db0011;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: inherit;
+        }
+        
+        .btn-primary:hover {
+            background-color: #b8000e;
+        }
+        
+        .btn-primary:active {
+            background-color: #9a000c;
+        }
+        
+        .btn-primary:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .info-box {
+            background: #f0f8ff;
+            border-left: 4px solid #0078d4;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #333;
+            border-radius: 4px;
+        }
+        
+        .info-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .requirements-list {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .requirements-list li {
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .login-prompt {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .login-prompt p {
+            margin: 0 0 15px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #db0011;
+            background-color: white;
+            border: 2px solid #db0011;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #db0011;
+            color: white;
+        }
+        
+        .register-footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .register-footer a {
+            color: #db0011;
+            text-decoration: none;
+        }
+        
+        .register-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .register-header {
+                padding: 15px 0;
+            }
+            
+            .register-header-content {
+                padding: 0 15px;
+            }
+            
+            .register-logo img {
+                height: 28px;
+            }
+            
+            .register-container {
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+            
+            .register-card {
+                padding: 25px 20px;
+            }
+            
+            .register-title {
+                font-size: 26px;
+            }
+            
+            .form-section-title {
+                font-size: 18px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-input,
+            .form-select {
+                padding: 12px 14px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            .btn-primary {
+                padding: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .register-header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .register-back-link {
+                order: -1;
+                font-size: 13px;
+            }
+            
+            .register-logo img {
+                height: 24px;
+            }
+            
+            .form-input-small {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-header">
+        <div class="register-header-content">
+            <div class="register-logo">
+                <img src="images/hsbc-uk.svg" alt="HSBC UK">
+            </div>
+            <a href="index.html" class="register-back-link">
+                <span>← Back to home</span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="register-container">
+        <div class="register-card">
+            <h1 class="register-title">Register</h1>
+            <p class="register-subtitle">
+                Create your HSBC UK Online Banking account. You'll need your account details and a valid UK mobile number to complete registration.
+            </p>
+            
+            <div class="info-box">
+                <strong>Before you start:</strong>
+                Make sure you have your HSBC debit card, account number, and sort code ready.
+            </div>
+            
+            <form id="registerForm">
+                <!-- Personal Details Section -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Personal details</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstname" class="form-label">First name</label>
+                            <input 
+                                type="text" 
+                                id="firstname" 
+                                name="firstname" 
+                                class="form-input" 
+                                placeholder="Enter your first name"
+                                required
+                                autocomplete="given-name"
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastname" class="form-label">Last name</label>
+                            <input 
+                                type="text" 
+                                id="lastname" 
+                                name="lastname" 
+                                class="form-input" 
+                                placeholder="Enter your last name"
+                                required
+                                autocomplete="family-name"
+                            >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dob" class="form-label">Date of birth</label>
+                        <input 
+                            type="date" 
+                            id="dob" 
+                            name="dob" 
+                            class="form-input" 
+                            required
+                            autocomplete="bday"
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            placeholder="your.email@example.com"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mobile" class="form-label">Mobile number <span class="form-label-hint">(UK only)</span></label>
+                        <input 
+                            type="tel" 
+                            id="mobile" 
+                            name="mobile" 
+                            class="form-input" 
+                            placeholder="07XXX XXXXXX"
+                            required
+                            autocomplete="tel"
+                            pattern="[0-9]{11}"
+                        >
+                    </div>
+                </div>
+                
+                <!-- Account Details Section -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Account details</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sortcode" class="form-label">Sort code</label>
+                            <input 
+                                type="text" 
+                                id="sortcode" 
+                                name="sortcode" 
+                                class="form-input" 
+                                placeholder="XX-XX-XX"
+                                required
+                                pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}"
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="accountnumber" class="form-label">Account number</label>
+                            <input 
+                                type="text" 
+                                id="accountnumber" 
+                                name="accountnumber" 
+                                class="form-input" 
+                                placeholder="XXXXXXXX"
+                                required
+                                pattern="[0-9]{8}"
+                                maxlength="8"
+                            >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardnumber" class="form-label">Debit card number <span class="form-label-hint">(last 4 digits)</span></label>
+                        <input 
+                            type="text" 
+                            id="cardnumber" 
+                            name="cardnumber" 
+                            class="form-input form-input-small" 
+                            placeholder="XXXX"
+                            required
+                            pattern="[0-9]{4}"
+                            maxlength="4"
+                        >
+                    </div>
+                </div>
+                
+                <!-- Create Username & Password Section -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Create your login details</h2>
+                    
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            class="form-input" 
+                            placeholder="Choose a username"
+                            required
+                            autocomplete="username"
+                            minlength="6"
+                        >
+                        <ul class="requirements-list">
+                            <li>Must be at least 6 characters long</li>
+                            <li>Must not contain spaces</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="form-input" 
+                            placeholder="Create a strong password"
+                            required
+                            autocomplete="new-password"
+                            minlength="8"
+                        >
+                        <ul class="requirements-list">
+                            <li>Must be at least 8 characters long</li>
+                            <li>Must contain at least one uppercase letter</li>
+                            <li>Must contain at least one number</li>
+                            <li>Must contain at least one special character</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmpassword" class="form-label">Confirm password</label>
+                        <input 
+                            type="password" 
+                            id="confirmpassword" 
+                            name="confirmpassword" 
+                            class="form-input" 
+                            placeholder="Re-enter your password"
+                            required
+                            autocomplete="new-password"
+                        >
+                    </div>
+                </div>
+                
+                <!-- Security Question Section -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Security question</h2>
+                    
+                    <div class="form-group">
+                        <label for="securityquestion" class="form-label">Choose a security question</label>
+                        <select id="securityquestion" name="securityquestion" class="form-select" required>
+                            <option value="">Select a question...</option>
+                            <option value="q1">What was the name of your first pet?</option>
+                            <option value="q2">In which city were you born?</option>
+                            <option value="q3">What is your mother's maiden name?</option>
+                            <option value="q4">What was the name of your first school?</option>
+                            <option value="q5">What is your favourite colour?</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="securityanswer" class="form-label">Your answer</label>
+                        <input 
+                            type="text" 
+                            id="securityanswer" 
+                            name="securityanswer" 
+                            class="form-input" 
+                            placeholder="Enter your answer"
+                            required
+                        >
+                    </div>
+                </div>
+                
+                <!-- Terms & Conditions -->
+                <div class="form-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">
+                        I agree to the <a href="index.html">Terms and Conditions</a> and <a href="index.html">Privacy Policy</a>. I confirm that I am 18 years or older and a UK resident.
+                    </label>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="marketing" name="marketing">
+                    <label for="marketing">
+                        I would like to receive marketing communications from HSBC about products and services that may be of interest to me.
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn-primary">Complete registration</button>
+            </form>
+        </div>
+        
+        <div class="login-prompt">
+            <p>Already registered for Online Banking?</p>
+            <a href="login.html" class="btn-secondary">Log on</a>
+        </div>
+    </div>
+    
+    <div class="register-footer">
+        <p>© HSBC Group 2025. All rights reserved.</p>
+        <p>
+            <a href="index.html">Privacy</a> | 
+            <a href="index.html">Security</a> | 
+            <a href="index.html">Terms & Conditions</a>
+        </p>
+    </div>
+    
+    <script>
+        // Handle registration form submission
+        document.getElementById('registerForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real app, this would validate and submit to backend
+            // For now, redirect to dashboard after successful registration
+            window.location.href = '/dashboard';
+        });
+    </script>
+</body>
+</html>

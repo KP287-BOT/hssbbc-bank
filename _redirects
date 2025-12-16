@@ -1,0 +1,11 @@
+# Clean URL redirects for Render static site
+/login              /login.html           200
+/register           /register.html        200
+/dashboard          /dashboard.html       200
+/cards              /cards.html           200
+/bills              /bills.html           200
+/statements         /statements.html      200
+/notifications      /notifications.html   200
+
+# Fallback for 404
+/*                  /index.html           404

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bills - HSBC UK</title>
+    
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    
+    <link rel="stylesheet" href="css/clientlib-default.min.bc3db1806f34ca832853612759e8756d.css" type="text/css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="icon-button" onclick="window.location.href='dashboard.html'" aria-label="Back">
+                    <i data-lucide="arrow-left"></i>
+                </button>
+                <div class="logo">
+                    <img src="images/hsbc-uk.svg" alt="HSBC UK">
+                </div>
+                <h1 style="font-size: 20px; font-weight: 600; margin-left: 16px;">My Bills</h1>
+            </div>
+            
+            <div class="header-right">
+                <button class="icon-button" aria-label="Help">
+                    <i data-lucide="help-circle"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Bills Summary -->
+        <section style="margin-bottom: 32px;">
+            <div style="
+                background: linear-gradient(135deg, #DB0011, #B30010);
+                border-radius: 20px;
+                padding: 32px 24px;
+                color: white;
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            ">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <i data-lucide="receipt" style="width: 24px; height: 24px;"></i>
+                    <span style="font-size: 14px; opacity: 0.9;">Total Upcoming Bills</span>
+                </div>
+                <div style="font-size: 42px; font-weight: 700; letter-spacing: -1px;">£2,421.00</div>
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 14px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span style="opacity: 0.9;">Next payment due</span>
+                        <span style="font-weight: 600;">11 Dec 2025</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Upcoming Bills -->
+        <section style="margin-bottom: 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-size: 20px; font-weight: 600;">Upcoming Bills</h2>
+                <button 
+                    onclick="showSetupModal()"
+                    style="
+                        padding: 8px 16px;
+                        background: #DB0011;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        cursor: pointer;
+                    "
+                >
+                    <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+                    Add Bill
+                </button>
+            </div>
+            
+            <div class="bills-list">
+                <div class="bill-item">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1;">
+                        <div class="transaction-icon" style="background: rgba(59, 130, 246, 0.1);">
+                            <i data-lucide="droplet" style="color: #3B82F6;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 4px;">Thames Water</div>
+                            <div style="font-size: 14px; color: #6B7280;">Due 11 Dec 2025 • Direct Debit</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 20px; font-weight: 700; color: #DB0011;">£127.84</div>
+                        <div style="font-size: 12px; color: #6B7280; margin-top: 2px;">
+                            <i data-lucide="check-circle" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                            Scheduled
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bill-item">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1;">
+                        <div class="transaction-icon" style="background: rgba(249, 115, 22, 0.1);">
+                            <i data-lucide="flame" style="color: #F97316;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 4px;">British Gas</div>
+                            <div style="font-size: 14px; color: #6B7280;">Due 15 Dec 2025 • Direct Debit</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 20px; font-weight: 700; color: #DB0011;">£198.45</div>
+                        <div style="font-size: 12px; color: #6B7280; margin-top: 2px;">
+                            <i data-lucide="check-circle" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                            Scheduled
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bill-item">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1;">
+                        <div class="transaction-icon" style="background: rgba(139, 92, 246, 0.1);">
+                            <i data-lucide="wifi" style="color: #8B5CF6;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 4px;">BT Broadband</div>
+                            <div style="font-size: 14px; color: #6B7280;">Due 18 Dec 2025 • Direct Debit</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 20px; font-weight: 700; color: #DB0011;">£45.99</div>
+                        <div style="font-size: 12px; color: #6B7280; margin-top: 2px;">
+                            <i data-lucide="check-circle" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                            Scheduled
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bill-item">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1;">
+                        <div class="transaction-icon" style="background: rgba(16, 185, 129, 0.1);">
+                            <i data-lucide="landmark" style="color: #10B981;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 4px;">Westminster Council Tax</div>
+                            <div style="font-size: 14px; color: #6B7280;">Due 22 Dec 2025 • Direct Debit</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 20px; font-weight: 700; color: #DB0011;">£1,845.00</div>
+                        <div style="font-size: 12px; color: #6B7280; margin-top: 2px;">
+                            <i data-lucide="check-circle" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                            Scheduled
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bill-item">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1;">
+                        <div class="transaction-icon" style="background: rgba(236, 72, 153, 0.1);">
+                            <i data-lucide="smartphone" style="color: #EC4899;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 4px;">EE Mobile</div>
+                            <div style="font-size: 14px; color: #6B7280;">Due 28 Dec 2025 • Direct Debit</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 20px; font-weight: 700; color: #DB0011;">£52.00</div>
+                        <div style="font-size: 12px; color: #6B7280; margin-top: 2px;">
+                            <i data-lucide="check-circle" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                            Scheduled
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bill-item">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1;">
+                        <div class="transaction-icon" style="background: rgba(245, 158, 11, 0.1);">
+                            <i data-lucide="zap" style="color: #F59E0B;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 4px;">Octopus Energy</div>
+                            <div style="font-size: 14px; color: #6B7280;">Due 30 Dec 2025 • Direct Debit</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 20px; font-weight: 700; color: #DB0011;">£151.72</div>
+                        <div style="font-size: 12px; color: #6B7280; margin-top: 2px;">
+                            <i data-lucide="check-circle" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                            Scheduled
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Past Bills -->
+        <section>
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 20px;">Past Bills</h2>
+            
+            <div class="bills-list">
+                <div class="bill-item" style="opacity: 0.6;">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1;">
+                        <div class="transaction-icon" style="background: rgba(16, 185, 129, 0.1);">
+                            <i data-lucide="check-circle-2" style="color: #10B981;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 4px;">British Gas</div>
+                            <div style="font-size: 14px; color: #6B7280;">Paid 8 Dec 2025 • Direct Debit</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 20px; font-weight: 700; color: #10B981;">£198.45</div>
+                        <div style="font-size: 12px; color: #10B981; margin-top: 2px;">
+                            <i data-lucide="check-circle-2" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                            Paid
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bill-item" style="opacity: 0.6;">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1;">
+                        <div class="transaction-icon" style="background: rgba(16, 185, 129, 0.1);">
+                            <i data-lucide="check-circle-2" style="color: #10B981;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 4px;">Thames Water</div>
+                            <div style="font-size: 14px; color: #6B7280;">Paid 9 Dec 2025 • Direct Debit</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 20px; font-weight: 700; color: #10B981;">£127.84</div>
+                        <div style="font-size: 12px; color: #10B981; margin-top: 2px;">
+                            <i data-lucide="check-circle-2" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                            Paid
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bill-item" style="opacity: 0.6;">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1;">
+                        <div class="transaction-icon" style="background: rgba(16, 185, 129, 0.1);">
+                            <i data-lucide="check-circle-2" style="color: #10B981;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 4px;">EE Mobile</div>
+                            <div style="font-size: 14px; color: #6B7280;">Paid 28 Nov 2025 • Direct Debit</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 20px; font-weight: 700; color: #10B981;">£52.00</div>
+                        <div style="font-size: 12px; color: #10B981; margin-top: 2px;">
+                            <i data-lucide="check-circle-2" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                            Paid
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="wallet"></i>
+            <span>Accounts</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="send"></i>
+            <span>Pay</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="credit-card"></i>
+            <span>Cards</span>
+        </button>
+        <button class="nav-item active">
+            <i data-lucide="more-horizontal"></i>
+            <span>More</span>
+        </button>
+    </nav>
+    
+    <script>
+        function showSetupModal() {
+            const modal = document.createElement('div');
+            modal.id = 'addBillModal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                padding: 20px;
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: white;
+                    border-radius: 16px;
+                    max-width: 500px;
+                    width: 100%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    padding: 32px;
+                ">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <h2 style="font-size: 24px; font-weight: 700; margin: 0;">Set Up Direct Debit</h2>
+                        <button onclick="document.getElementById('addBillModal').remove()" style="
+                            background: none;
+                            border: none;
+                            cursor: pointer;
+                            padding: 8px;
+                        ">
+                            <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+                        </button>
+                    </div>
+                    
+                    <form id="billForm" style="display: flex; flex-direction: column; gap: 20px;">
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px;">Company Name</label>
+                            <input type="text" required style="
+                                width: 100%;
+                                padding: 12px;
+                                border: 1px solid #E5E7EB;
+                                border-radius: 8px;
+                                font-size: 14px;
+                            " placeholder="e.g., British Gas">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px;">Amount</label>
+                            <input type="number" required step="0.01" style="
+                                width: 100%;
+                                padding: 12px;
+                                border: 1px solid #E5E7EB;
+                                border-radius: 8px;
+                                font-size: 14px;
+                            " placeholder="0.00">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px;">Payment Date</label>
+                            <input type="date" required style="
+                                width: 100%;
+                                padding: 12px;
+                                border: 1px solid #E5E7EB;
+                                border-radius: 8px;
+                                font-size: 14px;
+                            ">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px;">Frequency</label>
+                            <select required style="
+                                width: 100%;
+                                padding: 12px;
+                                border: 1px solid #E5E7EB;
+                                border-radius: 8px;
+                                font-size: 14px;
+                            ">
+                                <option value="">Select frequency</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="quarterly">Quarterly</option>
+                                <option value="annually">Annually</option>
+                            </select>
+                        </div>
+                        
+                        <div style="display: flex; gap: 12px; margin-top: 8px;">
+                            <button type="button" onclick="document.getElementById('addBillModal').remove()" style="
+                                flex: 1;
+                                padding: 12px;
+                                background: white;
+                                border: 1px solid #E5E7EB;
+                                border-radius: 8px;
+                                font-weight: 600;
+                                cursor: pointer;
+                            ">Cancel</button>
+                            <button type="submit" style="
+                                flex: 1;
+                                padding: 12px;
+                                background: #DB0011;
+                                color: white;
+                                border: none;
+                                border-radius: 8px;
+                                font-weight: 600;
+                                cursor: pointer;
+                            ">Set Up Direct Debit</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            lucide.createIcons();
+            
+            document.getElementById('billForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                modal.remove();
+                showToast('Direct Debit Set Up', 'success', 'Your new direct debit has been added successfully');
+            });
+        }
+        
+        function showToast(message, type = 'info', description = '') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const iconMap = {
+                success: 'check-circle-2',
+                error: 'x-circle',
+                warning: 'alert-circle',
+                info: 'info'
+            };
+            
+            toast.innerHTML = `
+                <i data-lucide="${iconMap[type]}" class="toast-icon"></i>
+                <div class="toast-content">
+                    <div class="toast-message">${message}</div>
+                    ${description ? `<div class="toast-description">${description}</div>` : ''}
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">
+                    <i data-lucide="x"></i>
+                </button>
+            `;
+            
+            container.appendChild(toast);
+            lucide.createIcons();
+            
+            setTimeout(() => toast.remove(), 4000);
+        }
+        
+        lucide.createIcons();
+    </script>
+    
+    <style>
+        @media (max-width: 768px) {
+            .header-left .icon-button[aria-label="Back"] {
+                display: none;
+            }
+        }
+    </style>
+</body>
+</html>

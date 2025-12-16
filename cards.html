@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cards - HSBC UK</title>
+    
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    
+    <link rel="stylesheet" href="css/clientlib-default.min.bc3db1806f34ca832853612759e8756d.css" type="text/css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="icon-button" onclick="window.location.href='dashboard.html'" aria-label="Back">
+                    <i data-lucide="arrow-left"></i>
+                </button>
+                <div class="logo">
+                    <img src="images/hsbc-uk.svg" alt="HSBC UK">
+                </div>
+                <h1 style="font-size: 20px; font-weight: 600; margin-left: 16px;">My Cards</h1>
+            </div>
+            
+            <div class="header-right">
+                <button class="icon-button" aria-label="Help">
+                    <i data-lucide="help-circle"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Card Visual -->
+        <section class="card-visual-section" style="margin-bottom: 32px;">
+            <div style="max-width: 400px; margin: 0 auto;">
+                <div class="credit-card" style="
+                    background: linear-gradient(135deg, #DB0011, #B30010);
+                    border-radius: 16px;
+                    padding: 32px 24px;
+                    color: white;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+                    position: relative;
+                    overflow: hidden;
+                    aspect-ratio: 1.586;
+                ">
+                    <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                    
+                    <div style="margin-bottom: 40px;">
+                        <div style="width: 50px; height: 40px; background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 6px;"></div>
+                    </div>
+                    
+                    <div style="font-size: 22px; letter-spacing: 3px; margin-bottom: 24px; font-weight: 500;" id="cardNumberDisplay">
+                        •••• •••• •••• 7284
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div>
+                            <div style="font-size: 10px; opacity: 0.8; text-transform: uppercase;">Card Holder</div>
+                            <div style="font-size: 16px; font-weight: 600; margin-top: 4px;">JULIE BAILEY</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 10px; opacity: 0.8;">Valid Thru</div>
+                            <div style="font-size: 14px; font-weight: 600; margin-top: 4px;">08/28</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card Back Details -->
+                    <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 10px; opacity: 0.8; text-transform: uppercase; margin-bottom: 4px;">CVV</div>
+                                <div style="font-size: 18px; font-weight: 600; letter-spacing: 2px;" id="cvvDisplay">•••</div>
+                            </div>
+                            <button onclick="toggleCardDetails()" id="toggleDetailsBtn" style="
+                                background: rgba(255,255,255,0.2);
+                                border: 1px solid rgba(255,255,255,0.3);
+                                color: white;
+                                padding: 8px 16px;
+                                border-radius: 8px;
+                                font-size: 13px;
+                                font-weight: 500;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                gap: 8px;
+                                transition: all 0.2s;
+                            " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                                <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
+                                <span id="toggleDetailsText">Show Details</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Quick Actions -->
+        <section style="margin-bottom: 32px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
+                <button class="card-action" onclick="showToast('View PIN', 'info', 'Your PIN is being retrieved securely')">
+                    <i data-lucide="lock" style="width: 32px; height: 32px; color: #DB0011; margin-bottom: 12px;"></i>
+                    <div style="font-weight: 600; margin-bottom: 4px;">View PIN</div>
+                    <div style="font-size: 13px; color: #6B7280;">Show card PIN</div>
+                </button>
+                
+                <button class="card-action" onclick="toggleFreeze()" id="freezeBtn">
+                    <i data-lucide="snowflake" style="width: 32px; height: 32px; color: #3B82F6; margin-bottom: 12px;"></i>
+                    <div style="font-weight: 600; margin-bottom: 4px;" id="freezeText">Freeze Card</div>
+                    <div style="font-size: 13px; color: #6B7280;">Temporarily block</div>
+                </button>
+                
+                <button class="card-action" onclick="showToast('Replace Card', 'info', 'Order a replacement card')">
+                    <i data-lucide="refresh-cw" style="width: 32px; height: 32px; color: #10B981; margin-bottom: 12px;"></i>
+                    <div style="font-weight: 600; margin-bottom: 4px;">Replace Card</div>
+                    <div style="font-size: 13px; color: #6B7280;">Order new card</div>
+                </button>
+                
+                <button class="card-action" onclick="showToast('Report Lost', 'warning', 'Report card as lost or stolen')">
+                    <i data-lucide="alert-triangle" style="width: 32px; height: 32px; color: #F59E0B; margin-bottom: 12px;"></i>
+                    <div style="font-weight: 600; margin-bottom: 4px;">Report Lost</div>
+                    <div style="font-size: 13px; color: #6B7280;">Lost or stolen</div>
+                </button>
+            </div>
+        </section>
+        
+        <!-- Card Controls -->
+        <section style="margin-bottom: 32px;">
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 24px;">Card Controls</h2>
+            
+            <div class="settings-card">
+                <div class="setting-item">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <i data-lucide="waves" style="width: 24px; height: 24px; color: #6B7280;"></i>
+                        <div>
+                            <div style="font-weight: 500; margin-bottom: 2px;">Contactless Payments</div>
+                            <div style="font-size: 13px; color: #6B7280;">Tap to pay transactions</div>
+                        </div>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" checked onchange="showToast('Contactless ' + (this.checked ? 'enabled' : 'disabled'), 'success')">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <i data-lucide="globe" style="width: 24px; height: 24px; color: #6B7280;"></i>
+                        <div>
+                            <div style="font-weight: 500; margin-bottom: 2px;">Online Payments</div>
+                            <div style="font-size: 13px; color: #6B7280;">E-commerce transactions</div>
+                        </div>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" checked onchange="showToast('Online payments ' + (this.checked ? 'enabled' : 'disabled'), 'success')">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <i data-lucide="plane" style="width: 24px; height: 24px; color: #6B7280;"></i>
+                        <div>
+                            <div style="font-weight: 500; margin-bottom: 2px;">International Payments</div>
+                            <div style="font-size: 13px; color: #6B7280;">Transactions abroad</div>
+                        </div>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" checked onchange="showToast('International payments ' + (this.checked ? 'enabled' : 'disabled'), 'success')">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <i data-lucide="landmark" style="width: 24px; height: 24px; color: #6B7280;"></i>
+                        <div>
+                            <div style="font-weight: 500; margin-bottom: 2px;">ATM Withdrawals</div>
+                            <div style="font-size: 13px; color: #6B7280;">Cash machine access</div>
+                        </div>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" checked onchange="showToast('ATM withdrawals ' + (this.checked ? 'enabled' : 'disabled'), 'success')">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item" style="border-bottom: none;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <i data-lucide="dice-5" style="width: 24px; height: 24px; color: #6B7280;"></i>
+                        <div>
+                            <div style="font-weight: 500; margin-bottom: 2px;">Gambling Transactions</div>
+                            <div style="font-size: 13px; color: #6B7280;">Block betting sites</div>
+                        </div>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" onchange="showToast('Gambling ' + (this.checked ? 'allowed' : 'blocked'), 'success')">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Recent Transactions -->
+        <section>
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 24px;">Recent Card Transactions</h2>
+            
+            <div class="transactions-list">
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: rgba(245, 158, 11, 0.1);">
+                        <i data-lucide="shopping-bag" style="color: #F59E0B;"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <div class="transaction-merchant">Harrods</div>
+                        <div class="transaction-meta">Card payment • Today, 10:23</div>
+                    </div>
+                    <div class="transaction-amount debit">-£2,847.50</div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: rgba(139, 92, 246, 0.1);">
+                        <i data-lucide="coffee" style="color: #8B5CF6;"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <div class="transaction-merchant">Caffè Nero</div>
+                        <div class="transaction-meta">Card payment • Today, 08:45</div>
+                    </div>
+                    <div class="transaction-amount debit">-£4.25</div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: rgba(16, 185, 129, 0.1);">
+                        <i data-lucide="shopping-cart" style="color: #10B981;"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <div class="transaction-merchant">Waitrose & Partners</div>
+                        <div class="transaction-meta">Card payment • Yesterday, 15:32</div>
+                    </div>
+                    <div class="transaction-amount debit">-£156.73</div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: rgba(245, 158, 11, 0.1);">
+                        <i data-lucide="shopping-bag" style="color: #F59E0B;"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <div class="transaction-merchant">Selfridges</div>
+                        <div class="transaction-meta">Card payment • Dec 8, 14:18</div>
+                    </div>
+                    <div class="transaction-amount debit">-£1,456.99</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="wallet"></i>
+            <span>Accounts</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="send"></i>
+            <span>Pay</span>
+        </button>
+        <button class="nav-item active">
+            <i data-lucide="credit-card"></i>
+            <span>Cards</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="more-horizontal"></i>
+            <span>More</span>
+        </button>
+    </nav>
+    
+    <script>
+        let isFrozen = false;
+        let detailsVisible = false;
+        
+        function toggleCardDetails() {
+            detailsVisible = !detailsVisible;
+            const cardNumberDisplay = document.getElementById('cardNumberDisplay');
+            const cvvDisplay = document.getElementById('cvvDisplay');
+            const toggleBtn = document.getElementById('toggleDetailsBtn');
+            const toggleText = document.getElementById('toggleDetailsText');
+            const icon = toggleBtn.querySelector('i');
+            
+            if (detailsVisible) {
+                cardNumberDisplay.textContent = '5423  9182  7841  7284';
+                cvvDisplay.textContent = '842';
+                toggleText.textContent = 'Hide Details';
+                icon.setAttribute('data-lucide', 'eye-off');
+            } else {
+                cardNumberDisplay.textContent = '••••  ••••  ••••  7284';
+                cvvDisplay.textContent = '•••';
+                toggleText.textContent = 'Show Details';
+                icon.setAttribute('data-lucide', 'eye');
+            }
+            
+            lucide.createIcons();
+        }
+        
+        function toggleFreeze() {
+            isFrozen = !isFrozen;
+            document.getElementById('freezeText').textContent = isFrozen ? 'Unfreeze Card' : 'Freeze Card';
+            showToast(isFrozen ? 'Card Frozen' : 'Card Unfrozen', 'success', isFrozen ? 'Your card is temporarily blocked' : 'Your card is now active');
+        }
+        
+        function showToast(message, type = 'info', description = '') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const iconMap = {
+                success: 'check-circle-2',
+                error: 'x-circle',
+                warning: 'alert-circle',
+                info: 'info'
+            };
+            
+            toast.innerHTML = `
+                <i data-lucide="${iconMap[type]}" class="toast-icon"></i>
+                <div class="toast-content">
+                    <div class="toast-message">${message}</div>
+                    ${description ? `<div class="toast-description">${description}</div>` : ''}
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">
+                    <i data-lucide="x"></i>
+                </button>
+            `;
+            
+            container.appendChild(toast);
+            lucide.createIcons();
+            
+            setTimeout(() => toast.remove(), 4000);
+        }
+        
+        lucide.createIcons();
+    </script>
+    
+    <style>
+        .card-action {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 20px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .card-action:hover {
+            border-color: #DB0011;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .card-action:active {
+            transform: translateY(0);
+        }
+        
+        .settings-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .setting-item {
+            padding: 20px;
+            border-bottom: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 28px;
+        }
+        
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #E5E7EB;
+            transition: 0.3s;
+            border-radius: 28px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        
+        .toggle input:checked + .toggle-slider {
+            background-color: #10B981;
+        }
+        
+        .toggle input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .header-left .icon-button[aria-label="Back"] {
+                display: none;
+            }
+            
+            .credit-card {
+                font-size: 18px !important;
+            }
+            
+            #cardNumberDisplay {
+                font-size: 18px !important;
+            }
+            
+            .card-action {
+                padding: 16px 12px;
+            }
+            
+            .card-action i {
+                width: 28px !important;
+                height: 28px !important;
+            }
+            
+            .setting-item {
+                padding: 16px;
+            }
+            
+            .transaction-item {
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .credit-card {
+                padding: 24px 16px !important;
+            }
+            
+            #cardNumberDisplay {
+                font-size: 16px !important;
+                letter-spacing: 2px !important;
+            }
+            
+            #toggleDetailsBtn {
+                padding: 6px 12px !important;
+                font-size: 12px !important;
+            }
+            
+            .card-action {
+                min-width: 140px;
+            }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Statements - HSBC UK</title>
+    
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    
+    <link rel="stylesheet" href="css/clientlib-default.min.bc3db1806f34ca832853612759e8756d.css" type="text/css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="icon-button" onclick="window.location.href='dashboard.html'" aria-label="Back">
+                    <i data-lucide="arrow-left"></i>
+                </button>
+                <div class="logo">
+                    <img src="images/hsbc-uk.svg" alt="HSBC UK">
+                </div>
+                <h1 style="font-size: 20px; font-weight: 600; margin-left: 16px;">My Statements</h1>
+            </div>
+            
+            <div class="header-right">
+                <button class="icon-button" aria-label="Help">
+                    <i data-lucide="help-circle"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Filters -->
+        <section style="margin-bottom: 32px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div>
+                    <label style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; color: #374151;">Account</label>
+                    <select id="accountFilter" style="width: 100%; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px;" onchange="filterStatements()">
+                        <option value="all">All Accounts</option>
+                        <option value="acc_001" selected>Premier Current (****9456)</option>
+                        <option value="acc_002">Advance Savings (****3821)</option>
+                        <option value="acc_003">Premier Credit Card (****7284)</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; color: #374151;">Year</label>
+                    <select id="yearFilter" style="width: 100%; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px;" onchange="filterStatements()">
+                        <option value="2025" selected>2025</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label style="display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; color: #374151;">Document Type</label>
+                    <select id="typeFilter" style="width: 100%; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px;" onchange="filterStatements()">
+                        <option value="all">All Documents</option>
+                        <option value="statement">Monthly Statements</option>
+                        <option value="annual">Annual Summary</option>
+                        <option value="tax">Tax Certificates</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Statements List -->
+        <section>
+            <div id="statementsList"></div>
+        </section>
+    </main>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="wallet"></i>
+            <span>Accounts</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="send"></i>
+            <span>Pay</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="credit-card"></i>
+            <span>Cards</span>
+        </button>
+        <button class="nav-item active">
+            <i data-lucide="more-horizontal"></i>
+            <span>More</span>
+        </button>
+    </nav>
+    
+    <script>
+        const statementsData = [
+            // 2025
+            { id: 'stmt_2025_12', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'December', type: 'statement', date: '2025-12-01', size: '245 KB' },
+            { id: 'stmt_2025_11', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'November', type: 'statement', date: '2025-11-01', size: '278 KB' },
+            { id: 'stmt_2025_10', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'October', type: 'statement', date: '2025-10-01', size: '312 KB' },
+            { id: 'stmt_2025_09', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'September', type: 'statement', date: '2025-09-01', size: '289 KB' },
+            { id: 'stmt_2025_08', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'August', type: 'statement', date: '2025-08-01', size: '301 KB' },
+            { id: 'stmt_2025_07', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'July', type: 'statement', date: '2025-07-01', size: '267 KB' },
+            { id: 'stmt_2025_06', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'June', type: 'statement', date: '2025-06-01', size: '294 KB' },
+            { id: 'stmt_2025_05', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'May', type: 'statement', date: '2025-05-01', size: '321 KB' },
+            { id: 'stmt_2025_04', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'April', type: 'statement', date: '2025-04-01', size: '276 KB' },
+            { id: 'stmt_2025_03', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'March', type: 'statement', date: '2025-03-01', size: '298 KB' },
+            { id: 'stmt_2025_02', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'February', type: 'statement', date: '2025-02-01', size: '254 KB' },
+            { id: 'stmt_2025_01', account: 'acc_001', accountName: 'Premier Current', year: 2025, month: 'January', type: 'statement', date: '2025-01-01', size: '287 KB' },
+            
+            // 2024
+            { id: 'stmt_2024_12', account: 'acc_001', accountName: 'Premier Current', year: 2024, month: 'December', type: 'statement', date: '2024-12-01', size: '305 KB' },
+            { id: 'stmt_2024_11', account: 'acc_001', accountName: 'Premier Current', year: 2024, month: 'November', type: 'statement', date: '2024-11-01', size: '298 KB' },
+            { id: 'stmt_2024_annual', account: 'acc_001', accountName: 'Premier Current', year: 2024, month: 'Annual Summary', type: 'annual', date: '2024-12-31', size: '1.2 MB' },
+            { id: 'tax_2024', account: 'acc_001', accountName: 'Premier Current', year: 2024, month: 'Tax Certificate', type: 'tax', date: '2024-12-31', size: '156 KB' },
+            
+            // 2023
+            { id: 'stmt_2023_12', account: 'acc_001', accountName: 'Premier Current', year: 2023, month: 'December', type: 'statement', date: '2023-12-01', size: '289 KB' },
+            { id: 'stmt_2023_annual', account: 'acc_001', accountName: 'Premier Current', year: 2023, month: 'Annual Summary', type: 'annual', date: '2023-12-31', size: '1.1 MB' },
+            { id: 'tax_2023', account: 'acc_001', accountName: 'Premier Current', year: 2023, month: 'Tax Certificate', type: 'tax', date: '2023-12-31', size: '148 KB' },
+            
+            // 2022
+            { id: 'stmt_2022_annual', account: 'acc_001', accountName: 'Premier Current', year: 2022, month: 'Annual Summary', type: 'annual', date: '2022-12-31', size: '1.0 MB' },
+            { id: 'tax_2022', account: 'acc_001', accountName: 'Premier Current', year: 2022, month: 'Tax Certificate', type: 'tax', date: '2022-12-31', size: '142 KB' },
+            
+            // 2021
+            { id: 'stmt_2021_annual', account: 'acc_001', accountName: 'Premier Current', year: 2021, month: 'Annual Summary', type: 'annual', date: '2021-12-31', size: '987 KB' },
+            { id: 'tax_2021', account: 'acc_001', accountName: 'Premier Current', year: 2021, month: 'Tax Certificate', type: 'tax', date: '2021-12-31', size: '139 KB' },
+            
+            // 2020
+            { id: 'stmt_2020_annual', account: 'acc_001', accountName: 'Premier Current', year: 2020, month: 'Annual Summary', type: 'annual', date: '2020-12-31', size: '945 KB' },
+            { id: 'tax_2020', account: 'acc_001', accountName: 'Premier Current', year: 2020, month: 'Tax Certificate', type: 'tax', date: '2020-12-31', size: '135 KB' },
+            
+            // 2019
+            { id: 'stmt_2019_annual', account: 'acc_001', accountName: 'Premier Current', year: 2019, month: 'Annual Summary', type: 'annual', date: '2019-12-31', size: '912 KB' },
+            { id: 'tax_2019', account: 'acc_001', accountName: 'Premier Current', year: 2019, month: 'Tax Certificate', type: 'tax', date: '2019-12-31', size: '131 KB' }
+        ];
+        
+        function filterStatements() {
+            const accountFilter = document.getElementById('accountFilter').value;
+            const yearFilter = parseInt(document.getElementById('yearFilter').value);
+            const typeFilter = document.getElementById('typeFilter').value;
+            
+            let filtered = statementsData.filter(stmt => {
+                if (accountFilter !== 'all' && stmt.account !== accountFilter) return false;
+                if (stmt.year !== yearFilter) return false;
+                if (typeFilter !== 'all' && stmt.type !== typeFilter) return false;
+                return true;
+            });
+            
+            renderStatements(filtered);
+        }
+        
+        function renderStatements(statements) {
+            const container = document.getElementById('statementsList');
+            
+            if (statements.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 48px 24px; color: #6B7280;">
+                        <i data-lucide="inbox" style="width: 64px; height: 64px; margin: 0 auto 16px; opacity: 0.5;"></i>
+                        <p style="font-size: 16px; font-weight: 500; margin-bottom: 8px;">No statements found</p>
+                        <p style="font-size: 14px;">Try adjusting your filters</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+            
+            const html = statements.map(stmt => {
+                const iconMap = {
+                    statement: 'file-text',
+                    annual: 'file-bar-chart',
+                    tax: 'receipt'
+                };
+                
+                return `
+                    <div class="statement-item" style="
+                        background: white;
+                        border: 1px solid #E5E7EB;
+                        border-radius: 12px;
+                        padding: 20px;
+                        margin-bottom: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 16px;
+                    ">
+                        <div style="display: flex; align-items: center; gap: 16px; flex: 1;">
+                            <div style="
+                                width: 48px;
+                                height: 48px;
+                                background: rgba(219, 0, 17, 0.1);
+                                border-radius: 12px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            ">
+                                <i data-lucide="${iconMap[stmt.type]}" style="color: #DB0011; width: 24px; height: 24px;"></i>
+                            </div>
+                            
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 4px;">${stmt.month} ${stmt.year}</div>
+                                <div style="font-size: 14px; color: #6B7280;">${stmt.accountName} • ${stmt.size}</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 8px;">
+                            <button 
+                                onclick="downloadStatement('${stmt.id}', 'pdf')"
+                                style="
+                                    padding: 8px 16px;
+                                    background: white;
+                                    border: 1px solid #E5E7EB;
+                                    border-radius: 8px;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                    cursor: pointer;
+                                    transition: all 0.2s;
+                                "
+                                onmouseover="this.style.background='#F9FAFB'"
+                                onmouseout="this.style.background='white'"
+                            >
+                                <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                                PDF
+                            </button>
+                            
+                            <button 
+                                onclick="downloadStatement('${stmt.id}', 'csv')"
+                                style="
+                                    padding: 8px 16px;
+                                    background: white;
+                                    border: 1px solid #E5E7EB;
+                                    border-radius: 8px;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                    cursor: pointer;
+                                    transition: all 0.2s;
+                                "
+                                onmouseover="this.style.background='#F9FAFB'"
+                                onmouseout="this.style.background='white'"
+                            >
+                                <i data-lucide="file-spreadsheet" style="width: 16px; height: 16px;"></i>
+                                CSV
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = html;
+            lucide.createIcons();
+        }
+        
+        function downloadStatement(statementId, format) {
+            showToast('Downloading', 'success', `Your ${format.toUpperCase()} statement is being prepared`);
+        }
+        
+        function showToast(message, type = 'info', description = '') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const iconMap = {
+                success: 'check-circle-2',
+                error: 'x-circle',
+                warning: 'alert-circle',
+                info: 'info'
+            };
+            
+            toast.innerHTML = `
+                <i data-lucide="${iconMap[type]}" class="toast-icon"></i>
+                <div class="toast-content">
+                    <div class="toast-message">${message}</div>
+                    ${description ? `<div class="toast-description">${description}</div>` : ''}
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">
+                    <i data-lucide="x"></i>
+                </button>
+            `;
+            
+            container.appendChild(toast);
+            lucide.createIcons();
+            
+            setTimeout(() => toast.remove(), 4000);
+        }
+        
+        // Initialize
+        filterStatements();
+        lucide.createIcons();
+    </script>
+    
+    <style>
+        @media (max-width: 768px) {
+            .header-left .icon-button[aria-label="Back"] {
+                display: none;
+            }
+        }
+    </style>
+</body>
+</html>

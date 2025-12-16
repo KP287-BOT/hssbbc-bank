@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSBC UK - Personal Banking & Online Banking</title>
+    <meta name="description" content="Welcome to HSBC UK. Explore our range of personal banking services including current accounts, savings, credit cards, loans, and mortgages.">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <meta name="theme-color" content="#ffffff">
+    
+    <link rel="stylesheet" href="css/clientlib-default.min.bc3db1806f34ca832853612759e8756d.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'UniversNextforHSBCW02-Rg', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Header/Navigation */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo {
+            height: 32px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: #DB0011;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #DB0011;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn {
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .btn-outline {
+            border: 2px solid #DB0011;
+            color: #DB0011;
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: #DB0011;
+            color: white;
+        }
+        
+        .btn-primary {
+            background: #DB0011;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #B30010;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(219, 0, 17, 0.3);
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            transition: all 0.3s ease;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #DB0011 0%, #B30010 100%);
+            color: white;
+            padding: 140px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=80') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-content h1 strong {
+            font-weight: 700;
+        }
+        
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-large {
+            padding: 16px 36px;
+            font-size: 16px;
+        }
+        
+        .btn-white {
+            background: white !important;
+            color: #DB0011 !important;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: none;
+        }
+        
+        .btn-white:hover {
+            background: #f4f4f4;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline-white {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+        }
+        
+        .btn-outline-white:hover {
+            background: white;
+            color: #DB0011;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background: #f9fafb;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 42px;
+            font-weight: 300;
+            color: #1F2937;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: 18px;
+            color: #6B7280;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #DB0011, #B30010);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 32px;
+        }
+        
+        .feature-icon i {
+            width: 36px;
+            height: 36px;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #1F2937;
+        }
+        
+        .feature-card p {
+            color: #6B7280;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .feature-link {
+            color: #DB0011;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }
+        
+        .feature-link:hover {
+            gap: 10px;
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 20px;
+            background: white;
+        }
+        
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .benefits-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .benefits-list {
+            list-style: none;
+        }
+        
+        .benefits-list li {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+        
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            background: #FEE2E2;
+            color: #DB0011;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .benefit-icon i {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .benefits-list h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #1F2937;
+        }
+        
+        .benefits-list p {
+            color: #6B7280;
+            line-height: 1.7;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 80px 20px;
+            background: #f9fafb;
+        }
+        
+        .products-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-content {
+            padding: 30px;
+        }
+        
+        .product-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1F2937;
+        }
+        
+        .product-card p {
+            color: #6B7280;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .product-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .product-features li {
+            padding: 8px 0;
+            color: #4B5563;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .product-features li::before {
+            content: '✓';
+            color: #10B981;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1600&q=80') center/cover;
+            opacity: 0.05;
+        }
+        
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-container h2 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        
+        .cta-container p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1F2937;
+            color: white;
+            padding: 60px 20px 30px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #D1D5DB;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #DB0011;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-bottom p {
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #374151;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: #DB0011;
+            transform: translateY(-3px);
+        }
+        
+        /* Mobile Menu Styles */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 20px;
+            z-index: 999;
+            max-height: calc(100vh - 70px);
+            overflow-y: auto;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+        
+        .mobile-nav ul li {
+            margin: 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .mobile-nav ul li a {
+            display: block;
+            padding: 15px 10px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        .mobile-nav ul li a:hover {
+            background: #F9FAFB;
+            color: #DB0011;
+        }
+        
+        .mobile-nav-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+        }
+        
+        .mobile-nav-cta .btn {
+            width: 100%;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 15px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .nav-cta {
+                display: none;
+            }
+            
+            .hero {
+                padding: 100px 20px 60px;
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero-image {
+                order: -1;
+            }
+            
+            .hero-image img {
+                max-height: 300px;
+                object-fit: cover;
+            }
+            
+            .hero-content h1 {
+                font-size: 42px;
+            }
+            
+            .benefits-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-image {
+                order: 2;
+            }
+            
+            .section-header h2 {
+                font-size: 32px;
+            }
+            
+            .cta-container h2 {
+                font-size: 36px;
+            }
+            
+            .features-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0;
+            }
+            
+            .nav-container {
+                padding: 0 15px;
+                height: 60px;
+            }
+            
+            .logo {
+                height: 28px;
+            }
+            
+            body {
+                padding-top: 60px;
+            }
+            
+            .mobile-nav {
+                top: 60px;
+            }
+            
+            .features {
+                padding: 60px 15px;
+            }
+            
+            .benefits {
+                padding: 60px 15px;
+            }
+            
+            .products {
+                padding: 60px 15px;
+            }
+            
+            .cta-section {
+                padding: 60px 15px;
+            }
+            
+            .footer {
+                padding: 40px 15px 20px;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero-content h1 {
+                font-size: 28px;
+                line-height: 1.3;
+            }
+            
+            .hero-content p {
+                font-size: 16px;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+            }
+            
+            .btn-large {
+                width: 100%;
+                text-align: center;
+                padding: 14px 28px;
+            }
+            
+            .section-header h2 {
+                font-size: 26px;
+            }
+            
+            .section-header p {
+                font-size: 16px;
+            }
+            
+            .feature-card {
+                padding: 30px 20px;
+            }
+            
+            .features-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .cta-container h2 {
+                font-size: 28px;
+            }
+            
+            .cta-container p {
+                font-size: 16px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .hero-image img {
+                max-height: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 24px;
+            }
+            
+            .nav-container {
+                height: 55px;
+            }
+            
+            .logo {
+                height: 24px;
+            }
+            
+            body {
+                padding-top: 55px;
+            }
+            
+            .mobile-nav {
+                top: 55px;
+            }
+            
+            .hero {
+                padding: 80px 15px 40px;
+            }
+            
+            .section-header h2 {
+                font-size: 22px;
+            }
+            
+            .feature-card h3 {
+                font-size: 18px;
+            }
+            
+            .benefits-list h3 {
+                font-size: 18px;
+            }
+            
+            .product-card h3 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="images/hsbc-uk.svg" alt="HSBC UK" class="logo">
+            </a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#features">Services</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#benefits">Why HSBC</a></li>
+                <li><a href="login.html">Online Banking</a></li>
+            </ul>
+            
+            <div class="nav-cta">
+                <a href="login.html" class="btn btn-outline">Log On</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="#features">Services</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#benefits">Why HSBC</a></li>
+            <li><a href="login.html">Online Banking</a></li>
+        </ul>
+        <div class="mobile-nav-cta">
+            <a href="login.html" class="btn btn-outline">Log On</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1><strong>Banking</strong> made<br>simple, secure,<br>and personal</h1>
+                <p>Experience modern banking with HSBC UK. Manage your money anytime, anywhere with our award-winning online and mobile banking services.</p>
+                <div class="hero-cta">
+                    <a href="register.html" class="btn btn-white btn-large">Open an Account</a>
+                    <a href="login.html" class="btn btn-outline-white btn-large">Log On</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80" alt="Modern Banking">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Everything you need to manage your money</h2>
+            <p>Access comprehensive banking services designed for your financial wellbeing</p>
+        </div>
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="wallet"></i></div>
+                <h3>Current Accounts</h3>
+                <p>Flexible current accounts with online and mobile banking, overdrafts, and cashback rewards.</p>
+                <a href="register.html" class="feature-link">Explore Accounts →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="piggy-bank"></i></div>
+                <h3>Savings & ISAs</h3>
+                <p>Grow your money with competitive interest rates and tax-free savings options.</p>
+                <a href="register.html" class="feature-link">Start Saving →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="credit-card"></i></div>
+                <h3>Credit Cards</h3>
+                <p>Enjoy rewards, cashback, and 0% balance transfer offers on our range of credit cards.</p>
+                <a href="register.html" class="feature-link">View Cards →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="home"></i></div>
+                <h3>Mortgages</h3>
+                <p>Find the right mortgage for your dream home with competitive rates and expert guidance.</p>
+                <a href="register.html" class="feature-link">Get Started →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="trending-up"></i></div>
+                <h3>Investments</h3>
+                <p>Build your wealth with our range of investment products and expert financial advice.</p>
+                <a href="register.html" class="feature-link">Learn More →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="globe"></i></div>
+                <h3>International Banking</h3>
+                <p>Send money abroad, exchange currency, and bank internationally with ease.</p>
+                <a href="register.html" class="feature-link">Go Global →</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="benefits-container">
+            <div class="benefits-image">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="Secure Banking">
+            </div>
+            <div class="benefits-content">
+                <div class="section-header" style="text-align: left; margin-bottom: 40px;">
+                    <h2>Why choose HSBC UK?</h2>
+                    <p style="margin: 0;">Trusted by millions of customers worldwide</p>
+                </div>
+                <ul class="benefits-list">
+                    <li>
+                        <div class="benefit-icon"><i data-lucide="shield-check"></i></div>
+                        <div>
+                            <h3>Bank-level Security</h3>
+                            <p>Your money and data are protected by industry-leading security measures and fraud detection systems.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="benefit-icon"><i data-lucide="smartphone"></i></div>
+                        <div>
+                            <h3>Award-winning App</h3>
+                            <p>Manage your finances on the go with our intuitive mobile banking app, rated 4.7 stars.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="benefit-icon"><i data-lucide="map-pin"></i></div>
+                        <div>
+                            <h3>Global Network</h3>
+                            <p>Access your money anywhere in the world with our extensive international banking network.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="benefit-icon"><i data-lucide="message-circle"></i></div>
+                        <div>
+                            <h3>24/7 Support</h3>
+                            <p>Get help whenever you need it with our round-the-clock customer service team.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header">
+            <h2>Our most popular products</h2>
+            <p>Find the perfect banking solution for your needs</p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1580893246395-52aead8960dc?w=600&q=80');"></div>
+                <div class="product-content">
+                    <h3>Premier Current Account</h3>
+                    <p>Our premium banking package with exclusive benefits and global services.</p>
+                    <ul class="product-features">
+                        <li>No monthly fee</li>
+                        <li>Worldwide travel insurance</li>
+                        <li>Exclusive rewards & cashback</li>
+                        <li>Dedicated relationship manager</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-primary" style="width: 100%;">Open Account</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1559526324-593bc073d938?w=600&q=80');"></div>
+                <div class="product-content">
+                    <h3>Advance Bank Account</h3>
+                    <p>Everything you need for day-to-day banking with added rewards.</p>
+                    <ul class="product-features">
+                        <li>Free banking</li>
+                        <li>Cashback on spending</li>
+                        <li>Interest-free overdraft</li>
+                        <li>Mobile & online banking</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-primary" style="width: 100%;">Open Account</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1556742111-a301076d9d18?w=600&q=80');"></div>
+                <div class="product-content">
+                    <h3>Flexible Saver</h3>
+                    <p>Easy access savings account with competitive interest rates.</p>
+                    <ul class="product-features">
+                        <li>Competitive interest rates</li>
+                        <li>No monthly fees</li>
+                        <li>Easy access to your money</li>
+                        <li>Save from £1</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-primary" style="width: 100%;">Start Saving</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Ready to get started?</h2>
+            <p>Join millions of customers who trust HSBC UK for their banking needs. Open your account in minutes.</p>
+            <div class="hero-cta">
+                <a href="register.html" class="btn btn-white btn-large">Open an Account</a>
+                <a href="login.html" class="btn btn-outline-white btn-large">Existing Customer? Log On</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="register.html">Current Accounts</a></li>
+                        <li><a href="register.html">Savings Accounts</a></li>
+                        <li><a href="register.html">Credit Cards</a></li>
+                        <li><a href="register.html">Mortgages</a></li>
+                        <li><a href="register.html">Loans</a></li>
+                        <li><a href="register.html">Investments</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="login.html">Online Banking</a></li>
+                        <li><a href="login.html">Mobile Banking</a></li>
+                        <li><a href="login.html">Pay Bills</a></li>
+                        <li><a href="login.html">Money Transfers</a></li>
+                        <li><a href="statements.html">Statements</a></li>
+                        <li><a href="notifications.html">Notifications</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Help Centre</a></li>
+                        <li><a href="dashboard.html">Contact Us</a></li>
+                        <li><a href="dashboard.html">Security Centre</a></li>
+                        <li><a href="dashboard.html">Branch Finder</a></li>
+                        <li><a href="dashboard.html">FAQs</a></li>
+                        <li><a href="dashboard.html">Complaints</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>About HSBC</h4>
+                    <ul>
+                        <li><a href="dashboard.html">About Us</a></li>
+                        <li><a href="dashboard.html">Careers</a></li>
+                        <li><a href="dashboard.html">Newsroom</a></li>
+                        <li><a href="dashboard.html">Sustainability</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSBC UK. All rights reserved. HSBC UK Bank plc is authorised by the Prudential Regulation Authority and regulated by the Financial Conduct Authority and the Prudential Regulation Authority.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        let mobileMenuOpen = false;
+        
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileMenuOpen = !mobileMenuOpen;
+            mobileNav.classList.toggle('active');
+            
+            // Animate hamburger icon
+            const spans = mobileMenuToggle.querySelectorAll('span');
+            if (mobileMenuOpen) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (mobileMenuOpen && !mobileNav.contains(e.target)) {
+                mobileMenuOpen = false;
+                mobileNav.classList.remove('active');
+                const spans = mobileMenuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

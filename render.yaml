@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: hsbc-uk-bank
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /login
+        destination: /login.html
+      - type: rewrite
+        source: /register
+        destination: /register.html
+      - type: rewrite
+        source: /dashboard
+        destination: /dashboard.html
+      - type: rewrite
+        source: /cards
+        destination: /cards.html
+      - type: rewrite
+        source: /bills
+        destination: /bills.html
+      - type: rewrite
+        source: /statements
+        destination: /statements.html
+      - type: rewrite
+        source: /notifications
+        destination: /notifications.html

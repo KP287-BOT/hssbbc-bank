@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - HSBC UK</title>
+    
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    
+    <link rel="stylesheet" href="css/clientlib-default.min.bc3db1806f34ca832853612759e8756d.css" type="text/css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="icon-button" onclick="window.location.href='dashboard.html'" aria-label="Back">
+                    <i data-lucide="arrow-left"></i>
+                </button>
+                <div class="logo">
+                    <img src="images/hsbc-uk.svg" alt="HSBC UK">
+                </div>
+                <h1 style="font-size: 20px; font-weight: 600; margin-left: 16px;">Notifications</h1>
+            </div>
+            
+            <div class="header-right">
+                <button class="icon-button" onclick="markAllAsRead()" aria-label="Mark all as read">
+                    <i data-lucide="check-check"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Filter Tabs -->
+        <section style="margin-bottom: 24px;">
+            <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px;">
+                <button class="filter-tab active" onclick="filterNotifications('all')" data-filter="all">
+                    All
+                </button>
+                <button class="filter-tab" onclick="filterNotifications('transactions')" data-filter="transactions">
+                    Transactions
+                </button>
+                <button class="filter-tab" onclick="filterNotifications('security')" data-filter="security">
+                    Security
+                </button>
+                <button class="filter-tab" onclick="filterNotifications('bills')" data-filter="bills">
+                    Bills
+                </button>
+                <button class="filter-tab" onclick="filterNotifications('updates')" data-filter="updates">
+                    Updates
+                </button>
+            </div>
+        </section>
+        
+        <!-- Notifications List -->
+        <section>
+            <div id="notificationsList">
+                <!-- Today -->
+                <div class="notifications-group">
+                    <div style="font-size: 14px; font-weight: 600; color: #6B7280; margin-bottom: 16px;">Today</div>
+                    
+                    <div class="notification-item unread" data-category="transactions">
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="arrow-down-left" style="color: #10B981; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 4px;">Payment Received</div>
+                                <div style="font-size: 14px; color: #6B7280; margin-bottom: 8px;">
+                                    Salary payment of £12,500.00 has been credited to your Premier Current Account.
+                                </div>
+                                <div style="font-size: 13px; color: #9CA3AF;">5 minutes ago</div>
+                            </div>
+                            <div style="width: 8px; height: 8px; background: #DB0011; border-radius: 50%; flex-shrink: 0; margin-top: 6px;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item unread" data-category="security">
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="shield-check" style="color: #3B82F6; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 4px;">New Device Login</div>
+                                <div style="font-size: 14px; color: #6B7280; margin-bottom: 8px;">
+                                    Your account was accessed from a new device. If this wasn't you, contact us immediately.
+                                </div>
+                                <div style="font-size: 13px; color: #9CA3AF;">2 hours ago</div>
+                            </div>
+                            <div style="width: 8px; height: 8px; background: #DB0011; border-radius: 50%; flex-shrink: 0; margin-top: 6px;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item unread" data-category="bills">
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: rgba(245, 158, 11, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="calendar-clock" style="color: #F59E0B; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 4px;">Upcoming Bill Payment</div>
+                                <div style="font-size: 14px; color: #6B7280; margin-bottom: 8px;">
+                                    Thames Water direct debit of £127.84 will be processed tomorrow.
+                                </div>
+                                <div style="font-size: 13px; color: #9CA3AF;">5 hours ago</div>
+                            </div>
+                            <div style="width: 8px; height: 8px; background: #DB0011; border-radius: 50%; flex-shrink: 0; margin-top: 6px;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Yesterday -->
+                <div class="notifications-group">
+                    <div style="font-size: 14px; font-weight: 600; color: #6B7280; margin-bottom: 16px;">Yesterday</div>
+                    
+                    <div class="notification-item" data-category="transactions">
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: rgba(219, 0, 17, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="shopping-bag" style="color: #DB0011; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 4px;">Large Transaction Alert</div>
+                                <div style="font-size: 14px; color: #6B7280; margin-bottom: 8px;">
+                                    Card payment of £2,847.50 at Harrods has been processed.
+                                </div>
+                                <div style="font-size: 13px; color: #9CA3AF;">Yesterday, 10:23</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item" data-category="updates">
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: rgba(139, 92, 246, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="sparkles" style="color: #8B5CF6; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 4px;">New Feature Available</div>
+                                <div style="font-size: 14px; color: #6B7280; margin-bottom: 8px;">
+                                    Track your spending with our new AI-powered insights. Tap to learn more.
+                                </div>
+                                <div style="font-size: 13px; color: #9CA3AF;">Yesterday, 09:15</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Earlier This Week -->
+                <div class="notifications-group">
+                    <div style="font-size: 14px; font-weight: 600; color: #6B7280; margin-bottom: 16px;">Earlier This Week</div>
+                    
+                    <div class="notification-item" data-category="bills">
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="check-circle" style="color: #10B981; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 4px;">Bill Payment Successful</div>
+                                <div style="font-size: 14px; color: #6B7280; margin-bottom: 8px;">
+                                    British Gas direct debit of £198.45 has been paid successfully.
+                                </div>
+                                <div style="font-size: 13px; color: #9CA3AF;">Dec 8, 08:00</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item" data-category="security">
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="key-round" style="color: #3B82F6; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 4px;">Password Changed</div>
+                                <div style="font-size: 14px; color: #6B7280; margin-bottom: 8px;">
+                                    Your online banking password was successfully changed.
+                                </div>
+                                <div style="font-size: 13px; color: #9CA3AF;">Dec 7, 14:30</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item" data-category="transactions">
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: rgba(236, 72, 153, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i data-lucide="credit-card" style="color: #EC4899; width: 24px; height: 24px;"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; margin-bottom: 4px;">Card Payment</div>
+                                <div style="font-size: 14px; color: #6B7280; margin-bottom: 8px;">
+                                    Payment of £1,456.99 at Selfridges was approved.
+                                </div>
+                                <div style="font-size: 13px; color: #9CA3AF;">Dec 6, 14:18</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="wallet"></i>
+            <span>Accounts</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="send"></i>
+            <span>Pay</span>
+        </button>
+        <button class="nav-item">
+            <i data-lucide="credit-card"></i>
+            <span>Cards</span>
+        </button>
+        <button class="nav-item active">
+            <i data-lucide="more-horizontal"></i>
+            <span>More</span>
+        </button>
+    </nav>
+    
+    <style>
+        .filter-tab {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        
+        .filter-tab:hover {
+            background: #F9FAFB;
+        }
+        
+        .filter-tab.active {
+            background: #DB0011;
+            color: white;
+            border-color: #DB0011;
+        }
+        
+        .notifications-group {
+            margin-bottom: 32px;
+        }
+        
+        .notification-item {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .notification-item:hover {
+            border-color: #DB0011;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .notification-item.unread {
+            background: #FFF5F5;
+            border-color: #FFE5E7;
+        }
+    </style>
+    
+    <script>
+        function filterNotifications(category) {
+            const tabs = document.querySelectorAll('.filter-tab');
+            tabs.forEach(tab => {
+                if (tab.dataset.filter === category) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            const notifications = document.querySelectorAll('.notification-item');
+            notifications.forEach(notif => {
+                if (category === 'all' || notif.dataset.category === category) {
+                    notif.style.display = 'block';
+                } else {
+                    notif.style.display = 'none';
+                }
+            });
+        }
+        
+        function markAllAsRead() {
+            const unreadNotifications = document.querySelectorAll('.notification-item.unread');
+            unreadNotifications.forEach(notif => {
+                notif.classList.remove('unread');
+                const badge = notif.querySelector('[style*="background: #DB0011"]');
+                if (badge) badge.style.display = 'none';
+            });
+            
+            showToast('All notifications marked as read', 'success');
+        }
+        
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const iconMap = {
+                success: 'check-circle-2',
+                error: 'x-circle',
+                warning: 'alert-circle',
+                info: 'info'
+            };
+            
+            toast.innerHTML = `
+                <i data-lucide="${iconMap[type]}" class="toast-icon"></i>
+                <div class="toast-content">
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">
+                    <i data-lucide="x"></i>
+                </button>
+            `;
+            
+            container.appendChild(toast);
+            lucide.createIcons();
+            
+            setTimeout(() => toast.remove(), 4000);
+        }
+        
+        lucide.createIcons();
+    </script>
+    
+    <style>
+        @media (max-width: 768px) {
+            .header-left .icon-button[aria-label="Back"] {
+                display: none;
+            }
+        }
+    </style>
+</body>
+</html>

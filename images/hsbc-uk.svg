@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="120" height="40">
+  <defs>
+    <style>
+      .hsbc-red { fill: #DB0011; }
+      .hsbc-text { fill: #333333; }
+    </style>
+  </defs>
+  
+  <!-- HSBC Hexagon Logo -->
+  <g transform="translate(2, 8)">
+    <!-- Top triangle -->
+    <polygon class="hsbc-red" points="12,0 24,6 12,12 0,6"/>
+    <!-- Bottom triangle -->
+    <polygon class="hsbc-red" points="12,12 24,18 12,24 0,18"/>
+    <!-- Left triangle -->
+    <polygon class="hsbc-red" points="0,6 12,12 0,18"/>
+    <!-- Right triangle -->
+    <polygon class="hsbc-red" points="24,6 12,12 24,18"/>
+  </g>
+  
+  <!-- HSBC Text -->
+  <text x="32" y="22" font-family="Arial, sans-serif" font-size="16" font-weight="bold" class="hsbc-text">HSBC</text>
+  
+  <!-- UK Text -->
+  <text x="78" y="22" font-family="Arial, sans-serif" font-size="12" font-weight="normal" class="hsbc-text">UK</text>
+</svg>
